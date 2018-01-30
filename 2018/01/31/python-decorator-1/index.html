@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        python-decorator-1 · Yoki Security
+        
+    </title>
+    <link rel="icon" href= /assets/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            box-shadow: -0.1rem 0 0.5rem 0 rgba(0, 0, 0, 0.5);
+        }
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20180120 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >notyeat</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">python-decorator-1</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>notyeat</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://www.cnchtl.cn./wallper.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            python-decorator-1
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = python,装饰器>python,装饰器</a>
+    
+</div>
+            
+            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = "/static/api/js/share.js"];</script>
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/01/31</span>
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe604;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">
+                        &#xe601;
+                    </span>
+                    <span class="bdsharebuttonbox">
+                        <a href="#" class="bds_more shareText" data-cmd="more">Share</a>
+                    </span>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="python的装饰器-上"><a href="#python的装饰器-上" class="headerlink" title="python的装饰器(上)"></a>python的装饰器(上)</h1><p><img src="https://pic4.zhimg.com/v2-1d67983232608e1c640db9da44da8027_r.jpg" alt=""></p>
+<p>文章先是发在<a href="https://zhuanlan.zhihu.com/p/32397076" target="_blank" rel="noopener">逼乎</a>，估计有一个月了，看到的人和赞的人也并不多，可能太偏向于基础了,python的装饰器进阶版的文章最近一直在外出，比较累所以没有去写他(自己懒！)，尽量早点鞭策自己早点写完</p>
+<p>说实话很早以前就想再继续更新博客了。第一个不瞒您说，太菜了，怕写的东西被人笑话是一方面，另一方面就是自己有很严重的拖延症，还比较懒。2018年立一个flag吧，最好是有时间规划的更新博客，比如一个星期或者两个星期一更</p>
+<h6 id="废话分界线"><a href="#废话分界线" class="headerlink" title="废话分界线"></a>废话分界线</h6><hr>
+<p>读这篇你必须了解的知识：</p>
+<ul>
+<li>python函数的知识</li>
+<li>python基础操作</li>
+</ul>
+<p>刚学python的时候，对装饰器这个概念很是难理解。在百度和知乎上看过很多大佬的文章，但总没有醍醐灌顶的那种感觉。总是觉得好像懂了些什么，其实又不懂。</p>
+<p>所以我决定写篇文章，用我的思路来来帮助看到这篇文章的读者理解python中的装饰器，希望能让大家少踩些坑。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>我觉得要了解装饰器，首先要明白什么是装饰器，装饰器拿来干嘛用，装饰器为什么这么写。这就是看完这篇文章你能知道的全部</p>
+<ul>
+<li>装饰器：<br>  从字面上的意思来说，装饰器。起到的是装饰的作用，其实说白了就是给函数加一个新的功能。<br>  他一般长成下面这个样子：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(f)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">        f()</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@decorator</span></span><br><span class="line">function():</span><br><span class="line">    some code</span><br><span class="line">    <span class="keyword">return</span> ....</span><br></pre></td></tr></table></figure>
+<p>其中decorator就是装饰器了。可能看到这边会有点懵，到后边会慢慢讲</p>
+<ul>
+<li>闭包：<br>  在我们讲装饰器的时候，要先讲一下闭包。闭包是一种奇特的函数</li>
+</ul>
+<h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wr = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    wr = wr+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> wr</span><br></pre></td></tr></table></figure>
+<p>大家看一下在foo函数中是不是能取到函数外的wr变量呢？当然是可以的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    wr =<span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">    wr = wr+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> wr</span><br></pre></td></tr></table></figure>
+<p>那么问题来了，在这个foo函数中我嵌套了一个wrapper函数，在wrapper函数中能不能取到在foo函数中的wr变量呢，其实是可以的</p>
+<p>wrapper函数使用到wr这个变量的时候，他先在自己函数内部寻找wr变量，发现没找到之后就会在他的上级，也就是这里的foo函数中寻找，然后他找到了wr = 1。如果foo中也没有找到wr变量的话，还会继续向更上一级寻找。</p>
+<h3 id="python中的一切都是对象"><a href="#python中的一切都是对象" class="headerlink" title="python中的一切都是对象"></a>python中的一切都是对象</h3><p>然后我们这边要讲一句python中很经典的一句话，就是python中的一切都是对象，其实我们实现的每个函数，都是顶级父类object的子类。这句话看不懂没关系，我们来举例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"im foo function!"</span>)</span><br><span class="line"></span><br><span class="line">fun = foo</span><br></pre></td></tr></table></figure>
+<p>大家觉得这段代码对吗，看起来我把foo赋值给了fun，那么fun里面到底是什么呢，我们来print一下吧：</p>
+<p>在我加上一个print来把fun输来看到下面的提示。没有报错说明我们的程序没有错，那么输出的是什么呢？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;function foo at <span class="number">0x02BA7348</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>function foo at 一串奇怪的东西，这串奇怪的东西其实是一串16进制的值，是函数foo在内存中的地址。原来我们在代码中打</p>
+<blockquote>
+<p>fun = foo</p>
+</blockquote>
+<p>的时候其实是把foo函数的内存地址给了fun啊</p>
+<p>那我们想想我们之前是怎么调用foo函数的?<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"im foo function!"</span>)</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
+<p>是不是这样,用 foo()来调用。那么我们是不是就可以得出:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"im foo function!"</span>)</span><br><span class="line"></span><br><span class="line">fun = foo</span><br><span class="line">fun()</span><br></pre></td></tr></table></figure></p>
+<p>这样我们就给foo函数改了个名字变成了fun，大家可以把代码放到pycharm里试试，把fun()和foo()的答案是不是一样的</p>
+<p>知道这两样之后，我们可以继续来了解闭包了：</p>
+<p>我们先不谈闭包到底是干嘛的，到后面会有演示，我们刚才说过，闭包是一种奇特的函数，那么我们就先搞清楚什么样的函数才能称得上叫做闭包这个名字:</p>
+<ul>
+<li>闭包函数必须有内嵌函数</li>
+<li>内嵌函数需要引用该嵌套函数上一级namespace中的变量</li>
+<li>闭包函数必须返回内嵌函数</li>
+</ul>
+<p>嗯，达成这三样我们就能创建一个闭包了，那大家和我一起来创建一个吧</p>
+<h4 id="闭包函数必须有内嵌函数"><a href="#闭包函数必须有内嵌函数" class="headerlink" title="闭包函数必须有内嵌函数:"></a>闭包函数必须有内嵌函数:</h4><p>先达成第一件，我们要先有个内嵌函数：</p>
+<p>直接抄上面的例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">    print(i want have a closure!)</span><br></pre></td></tr></table></figure>
+<p>好了好了，现在我有个内嵌函数了，在foo中嵌了个wrapper函数。</p>
+<h4 id="内嵌函数需要引用该嵌套函数上一级namespace中的变量"><a href="#内嵌函数需要引用该嵌套函数上一级namespace中的变量" class="headerlink" title="内嵌函数需要引用该嵌套函数上一级namespace中的变量"></a>内嵌函数需要引用该嵌套函数上一级namespace中的变量</h4><p>然后第二步其实就是说嵌在里面的那个函数要引用外面那个函数里面的一个变量才行。那这个简单啊，我可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">    a = a+<span class="number">1</span></span><br><span class="line">    print(i want have a closure!)</span><br></pre></td></tr></table></figure>
+<p>嵌套在foo函数中的wrapper函数引用了foo函数中的a变量</p>
+<p>嘿嘿，先别管这个函数有什么卵用，我们先来实现一个闭包先，然后我们这样也可以完成第二点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">    print(a)</span><br></pre></td></tr></table></figure>
+<p>然后我们来达成第三步</p>
+<h4 id="闭包函数必须返回内嵌函数"><a href="#闭包函数必须返回内嵌函数" class="headerlink" title="闭包函数必须返回内嵌函数"></a>闭包函数必须返回内嵌函数</h4><p>这个就更简单了嘛，加个return嘛，但是这里要注意了，是闭包函数返回内嵌函数，也就是说，套在外边的那个函数用return返回套在里面的那个函数的内存地址</p>
+<p>也就是foo函数return wrapper函数的内存地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">    print(a)</span><br><span class="line"><span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>这样我们就亲手创建了一个闭包，下面我们就要讲讲什么时候我们会用到闭包了：</p>
+<h2 id="用途解释"><a href="#用途解释" class="headerlink" title="用途解释"></a>用途解释</h2><p>首先我们来假象一个需求，我们要创建两个个函数foo、bar foo函数只要做一件事情，print一个hello<br>bar函数只要做一件事情，print一个world，这个简单啊对不对，大家都会：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello"</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"world"</span>)</span><br></pre></td></tr></table></figure>
+<p>好了，这个函数做得不错，大家都采用了这个方案并在很多代码中调用了这个函数。</p>
+<p>有一天产品经理过来说要给所有函数加一个功能，打印这个函数的运行时间(mmp,就输出个hello world还要我打印运行时间)。产品经理的小小要求还是要满足的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    startTime = time.time()</span><br><span class="line">    print(<span class="string">"hello"</span>)</span><br><span class="line">    stopTime = time.time()</span><br><span class="line">    print(stopTime - startTime)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    startTime = time.time()</span><br><span class="line">    print(<span class="string">"world"</span>)</span><br><span class="line">    stopTime = time.time()</span><br><span class="line">    print(stopTime - startTime)</span><br></pre></td></tr></table></figure>
+<p>但是这样虽然成功了，万一有很多函数到时候都要打印运行时间，那岂不是要完蛋。并且这种代码被同行看见会被笑话的，不行不行不行。改一改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeFUN</span><span class="params">(fun)</span>:</span></span><br><span class="line">    startTime = time.time()</span><br><span class="line">    fun()</span><br><span class="line">    stopTime = time.time()</span><br><span class="line">    print(stopTime - startTime)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello"</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"world"</span>)</span><br><span class="line">    </span><br><span class="line">timeFUN(foo)</span><br></pre></td></tr></table></figure>
+<p>写完之后瞬间觉得自己的智商碾压大众,让他们以后要用某个函数想知道运行时间的时候就用timeFUN()函数。</p>
+<p>但是！那foo函数和bar函数已经在很多地方应用了，改起来多麻烦，得想想办法。这个时候我们想到了闭包的移花接木大法,具体操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeFUN</span><span class="params">(fun)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span></span></span><br><span class="line">        startTime = time.time()</span><br><span class="line">        fun()</span><br><span class="line">        stopTime = time.time()</span><br><span class="line">        print(stopTime - startTime)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello"</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"world"</span>)</span><br><span class="line">    </span><br><span class="line">foo = timeFUN(foo)</span><br><span class="line">bar = timeFUN(bar)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<p>很显然timeFUN是一个标准的闭包吧，timeFun返回了wrapper函数的返回地址，这个时候我们把timeFun返回的wrapper函数的返回地址再赋值回foo，是不是有点绕，多看几遍这句话自己敲下代码</p>
+<p>经过这一顿骚操作，瞬间完成了需求。</p>
+<p>最后，其实python给了我们一个更方便的方法可以偷懒不用写</p>
+<blockquote>
+<p>foo = timeFUN(foo)</p>
+</blockquote>
+<p>这种赋值了</p>
+<p>最后完美版代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeFUN</span><span class="params">(fun)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span></span></span><br><span class="line">        startTime = time.time()</span><br><span class="line">        fun()</span><br><span class="line">        stopTime = time.time()</span><br><span class="line">        print(stopTime - startTime)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeFUN</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeFUN    </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"world"</span>)</span><br><span class="line">    </span><br><span class="line">foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
+<p>是不是和开头的例子很像呢，这就是python的装饰器的基础运用。其实装饰器就是闭包的一种啦。下篇有时间我来讲讲装饰器的高级运用，如果foo这个函数有参数又该怎么办呢？</p>
+<p>最后:<br>因为本人的水平有限可能会有许多地方理解和叙述有出入，希望大家能提出来防止我误人子弟。分享是好事，但是如果因为我理解上有问题，将来报道上有了偏差，我可是要负责任的</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2018/01/30/first-page-1/" title= hexo和atom的一些配置 >
+                    <span>Previous Post</span>
+                    <span>hexo和atom的一些配置</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:sialga@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/notyeat" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">VISITOR VOLUME: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#python的装饰器-上"><span class="toc-number">1.</span> <span class="toc-text">python的装饰器(上)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#废话分界线"><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">废话分界线</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#名词解释"><span class="toc-number">1.1.</span> <span class="toc-text">名词解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量的作用域"><span class="toc-number">1.1.1.</span> <span class="toc-text">变量的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python中的一切都是对象"><span class="toc-number">1.1.2.</span> <span class="toc-text">python中的一切都是对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包函数必须有内嵌函数"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">闭包函数必须有内嵌函数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内嵌函数需要引用该嵌套函数上一级namespace中的变量"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">内嵌函数需要引用该嵌套函数上一级namespace中的变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包函数必须返回内嵌函数"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">闭包函数必须返回内嵌函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用途解释"><span class="toc-number">1.2.</span> <span class="toc-text">用途解释</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 3 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/python-decorator-1/" >python-decorator-1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href= "/2018/01/30/first-page-1/" >hexo和atom的一些配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/29</span><a class="archive-post-title" href= "/2018/01/29/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">python,装饰器</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
