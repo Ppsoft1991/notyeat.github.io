@@ -158,6 +158,40 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/01/31/sql-inject-sqlmap/" >
+                
+                    <span>从sqlmap的payload里学sql注入(1)</span>
+            </a>
+            <a class="content-show-full" href = "/2018/01/31/sql-inject-sqlmap/" >
+                <div class="abstract-content">
+                    sqli-labs的注入题会自动把注入语句保存下来，正好可以拿来分析sqlmap的一些判断逻辑。
+0x01基础判断：12345678ID:1ID:1ID:1ID:1ID:1111ID:6601ID:1.)(.&quot;,&apos;(),ID:1&apos;aWAFUm&lt;&apos;&quot;&gt;avzTly
+当sqlmap注入了这些语句之后，cmd里面开始显示ID有可能有注入了，我把第七和第八条放到浏览器里面执行以下看看会返回什么
+
+报错了
+我猜可能sqlmap这里是通过后端报错才判断ID这个参数可能含有sql注入
+12345678910ID:1) AND 4934=49...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = sql注入>sql注入</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/31</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/01/31/python-decorator-1/" >
                 
                     <span>python的装饰器(上)</span>
@@ -334,7 +368,14 @@ More...
     
     
     
-    <div class="total-archive"> Total : 3 </div>
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 4 </div>
     
     <div class="post-archive">
     
@@ -343,6 +384,11 @@ More...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/sql-inject-sqlmap/" >从sqlmap的payload里学sql注入(1)</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -363,6 +409,8 @@ More...
   </div>
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">sql注入</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
     
