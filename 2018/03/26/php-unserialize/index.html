@@ -113,9 +113,9 @@
     
         <a class="post-tag" href="javascript:void(0);" data-href = php>php</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-href = unserialize>unserialize</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
     
 </div>
             
@@ -205,8 +205,72 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="最通俗易懂的PHP反序列化分析"><a href="#最通俗易懂的PHP反序列化分析" class="headerlink" title="最通俗易懂的PHP反序列化分析"></a>最通俗易懂的PHP反序列化分析</h1><h2 id="0x01写在前面"><a href="#0x01写在前面" class="headerlink" title="0x01写在前面"></a>0x01写在前面</h2><p>因为文章首发到了freebuf,so~ 在FB刊载之前先把这里的删掉了。</p>
-<p>等FB刊登后再发粗来</p>
+        <h1 id="最通俗易懂的PHP反序列化分析"><a href="#最通俗易懂的PHP反序列化分析" class="headerlink" title="最通俗易懂的PHP反序列化分析"></a>最通俗易懂的PHP反序列化分析</h1><h2 id="0x00写在最最最前面"><a href="#0x00写在最最最前面" class="headerlink" title="0x00写在最最最前面"></a>0x00写在最最最前面</h2><p>文章首发在<a href="http://www.freebuf.com/articles/web/167721.html" target="_blank" rel="noopener">Freebuf</a>，属FreeBuf原创奖励计划，未经许可禁止转载</p>
+<p>文章会慢慢优化，尽可能用最通俗的表达让大家明白一些知识点。</p>
+<h2 id="0x01写在前面"><a href="#0x01写在前面" class="headerlink" title="0x01写在前面"></a>0x01写在前面</h2><p>PHP反序列化漏洞虽然利用的条件比较苛刻，但是如果可以利用一般都会产生很严重的后果。在春招的时候很多公司都问过这个问题，说明这个反序列化漏洞的技能点也是很多公司比较关注的技能点。</p>
+<p>可是网上的文章基本讲得比较通俗，找了很久也没有找到一篇看完能让人醍醐灌顶的文章。所以想想就自己来总结一篇吧，我觉得要了解PHP反序列化漏洞，应该从这几方面：</p>
+<ul>
+<li>什么是反序列化</li>
+<li>为什么会产生这个漏洞</li>
+<li>在编程的过程中，什么时候会用到序列化这个概念</li>
+<li>实例分析</li>
+</ul>
+<h2 id="0x02什么是反序列化"><a href="#0x02什么是反序列化" class="headerlink" title="0x02什么是反序列化"></a>0x02什么是反序列化</h2><p>在我们讲PHP反序列化的时候，基本都是围绕着serialize()，unserialize()这两个函数。<br>那么什么是序列化呢，序列化说通俗点就是把一个对象变成可以传输的字符串。举个例子，不知道大家知不知道json格式，这就是一种序列化，有可能就是通过array序列化而来的。而反序列化就是把那串可以传输的字符串再变回对象。</p>
+<p>直接上例子便于理解：</p>
+<p>我们先讲一讲比较简单的序列化，我们就用序列化json来举例子吧。虽然序列化Json和我们讲PHP反序列化的漏洞没有什么关系。但是在理解序列化这个概念和之后的内容会有所帮助</p>
+<ul>
+<li>json_encode()</li>
+<li>json_decode()</li>
+</ul>
+<p>这两个函数，一眼就能看出来是做什么用的吧，直接上例子：</p>
+<p><img src="Picture1.png" alt=""></p>
+<p>这边有一个book的数组</p>
+<p>‘book1’=&gt;’Harry Potter’,<br>‘book2’=&gt;’MR.Bean’,<br>‘Book3’=&gt;’Python Cookbook’,<br>‘Book4’=&gt;’History’</p>
+<p>如果我们想传输这个数组怎么办呢，我们就可以请json_encode()这个函数帮助我们将这个数组序列化成一串字符串</p>
+<p><img src="Picture2.png" alt=""></p>
+<p>所以在这里，我们将数组序列化成json格式的字串的目的就是为了方便传输。我们可以看见，这里json格式来保存数据主要是使用键值对的形式。</p>
+<p>好啦，接下来我们要开始深入一步，来讲讲如何把一个对象序列化成一串字符串。</p>
+<p>假设，我们写了一个class，这个class里面存有一些变量。当这个class被实例化了之后，在使用过程中里面的一些变量值发生了改变。以后在某些时候还会用到这个变量，如果我们让这个class一直不销毁，等着下一次要用它的时候再一次被调用的话，浪费系统资源。当我们写一个小型的项目可能没有太大的影响，但是随着项目的壮大，一些小问题被放大了之后就会产生很多麻烦。这个时候PHP就和我们说，你可以把这个对象序列化了，存成一个字符串，当你要用的时候再放他出来就好了。</p>
+<p>那么，怎么才能把一个对象序列化呢？ 来，小二，上个例子：</p>
+<p><img src="Picture3.png" alt=""></p>
+<p>这里，我们先创了个DemoClass，里面存了点信息，后来我们new了一个实例$example的时候，将这个class里的一些信息给改变了。</p>
+<p>如果我们之后还要用到这个实例怎么办呢，我们就先将他序列化存起来，到时候用的时候再放出来就好啦。</p>
+<p>是不是很简单，只要用serialize()这个函数就行了<br><img src="Picture4.png" alt=""></p>
+<p>这个时候，我们发现这次序列化出来的格式，和我们上一个序列化json的格式有点不同呢，解释一波：</p>
+<p><img src="Picture5.png" alt=""></p>
+<p>然后如果反序列化回来的话</p>
+<p><img src="Picture6.png" alt=""></p>
+<h2 id="0x03为什么会产生这个漏洞"><a href="#0x03为什么会产生这个漏洞" class="headerlink" title="0x03为什么会产生这个漏洞?"></a>0x03为什么会产生这个漏洞?</h2><p>那么，问题来了，这么序列化一下然后反序列化，为什么就能产生漏洞了呢？</p>
+<p>这个时候，我们就要了解一下PHP里面的魔术方法了，魔法函数一般是以__开头，通常会因为某些条件而触发不用我们手动调用：</p>
+<p>在研究反序列化漏洞的时候，碰见这几个魔法函数就要仔细研究研究了：</p>
+<ul>
+<li>__construct()当一个对象创建时被调用</li>
+<li>__destruct()当一个对象销毁时被调用</li>
+<li>__toString()当一个对象被当作一个字符串使用</li>
+<li>__sleep() 在对象在被序列化之前运行</li>
+<li>__wakeup将在序列化之后立即被调用</li>
+</ul>
+<p>这些就是我们要关注的几个魔术方法了，如果服务器能够接收我们反序列化过的字符串、并且未经过滤的把其中的变量直接放进这些魔术方法里面的话，就容易造成很严重的漏洞了。</p>
+<p>举个别人的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> $test = <span class="string">"demo"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;test;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = $_GET[<span class="string">'test'</span>];</span><br><span class="line">$a_unser = unserialize($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我们只要构造payload：</p>
+<p><a href="http://127.0.0.1/test.php?test=O:1:&quot;A&quot;:1:{s:4:&quot;test&quot;;s:5:&quot;hello&quot;;}" target="_blank" rel="noopener">http://127.0.0.1/test.php?test=O:1:&quot;A&quot;:1:{s:4:&quot;test&quot;;s:5:&quot;hello&quot;;}</a></p>
+<p>就能控制echo出的变量，比如你能拿这个来进行反射型xss。。。（听你扯了半天你就给我看这个）</p>
+<h2 id="0x04-实例分析"><a href="#0x04-实例分析" class="headerlink" title="0x04 实例分析"></a>0x04 实例分析</h2><p>这里实战一题比较简单的<a href="http://web.jarvisoj.com:32768/index.php" target="_blank" rel="noopener">ctf题目</a>吧</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">'shield.php'</span>);</span><br><span class="line">    $x = <span class="keyword">new</span> Shield();</span><br><span class="line">    <span class="keyword">isset</span>($_GET[<span class="string">'class'</span>]) &amp;&amp; $g = $_GET[<span class="string">'class'</span>];</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">empty</span>($g)) &#123;</span><br><span class="line">        $x = unserialize($g);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> $x-&gt;readfile();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看见 先是包含了shield.php 然后从中new了个新的实例出来 最后接收用户的反序列化 输出readfile()方法</p>
+<p>跟进：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//flag is in pctf.php</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Shield</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> $file;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($filename = <span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">$this</span> -&gt; file = $filename;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">readfile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;file) &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'..'</span>)===<span class="keyword">FALSE</span>  </span><br><span class="line">            &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'/'</span>)===<span class="keyword">FALSE</span> &amp;&amp; stripos(<span class="keyword">$this</span>-&gt;file,<span class="string">'\\'</span>)==<span class="keyword">FALSE</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> @file_get_contents(<span class="keyword">$this</span>-&gt;file);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我们可以看见只要操控$file这个参数为pctf.php就可以了，这里construct函数在实例被创建的时候(也就是new Shield()的时候)执行，所以不会影响我们对$file的操作</p>
+<p>直接构造序列化对象传过去 O:6:”Shield”:1:{s:4:”file”;s:8:”pctf.php”;} 就行了</p>
+<hr>
+<h2 id="0x05餐后甜点"><a href="#0x05餐后甜点" class="headerlink" title="0x05餐后甜点"></a>0x05餐后甜点</h2><p>更多反序列化的漏洞分析：</p>
+<ul>
+<li><a href="http://www.freebuf.com/column/161798.html" target="_blank" rel="noopener">http://www.freebuf.com/column/161798.html</a></li>
+<li><a href="http://p0sec.net/index.php/archives/114/" target="_blank" rel="noopener">http://p0sec.net/index.php/archives/114/</a></li>
+<li><a href="http://paper.tuisec.win/detail/fa497a4e50b5d83" target="_blank" rel="noopener">http://paper.tuisec.win/detail/fa497a4e50b5d83</a></li>
+<li><a href="https://www.anquanke.com/post/id/84922" target="_blank" rel="noopener">https://www.anquanke.com/post/id/84922</a></li>
+</ul>
 
     </article>
     <!-- 前后页  -->
@@ -284,7 +348,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最通俗易懂的PHP反序列化分析"><span class="toc-number">1.</span> <span class="toc-text">最通俗易懂的PHP反序列化分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01写在前面"><span class="toc-number">1.1.</span> <span class="toc-text">0x01写在前面</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最通俗易懂的PHP反序列化分析"><span class="toc-number">1.</span> <span class="toc-text">最通俗易懂的PHP反序列化分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00写在最最最前面"><span class="toc-number">1.1.</span> <span class="toc-text">0x00写在最最最前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01写在前面"><span class="toc-number">1.2.</span> <span class="toc-text">0x01写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02什么是反序列化"><span class="toc-number">1.3.</span> <span class="toc-text">0x02什么是反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03为什么会产生这个漏洞"><span class="toc-number">1.4.</span> <span class="toc-text">0x03为什么会产生这个漏洞?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-实例分析"><span class="toc-number">1.5.</span> <span class="toc-text">0x04 实例分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05餐后甜点"><span class="toc-number">1.6.</span> <span class="toc-text">0x05餐后甜点</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
@@ -419,15 +483,15 @@
     
         <span class="sidebar-tag-name"><a href= "#">php</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">unserialize</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">代码审计</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">unserialize</a></span>
+        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">python</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">装饰器</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">sql注入</a></span>
     
