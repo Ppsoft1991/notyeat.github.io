@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Yoki Security
+        漏洞挖掘：一个有趣的越权获取任意用户的session · Yoki Security
         
     </title>
     <link rel="icon" href= /assets/favicon.ico>
@@ -58,6 +58,8 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
@@ -65,27 +67,71 @@
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >notyeat</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">漏洞挖掘：一个有趣的越权获取任意用户的session</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>notyeat</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://123.207.126.78/wallper.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            漏洞挖掘：一个有趣的越权获取任意用户的session
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 漏洞挖掘>漏洞挖掘</a>
+    
+</div>
+            
+            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = "/static/api/js/share.js"];</script>
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/07/31</span>
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe604;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">
+                        &#xe601;
+                    </span>
+                    <span class="bdsharebuttonbox">
+                        <a href="#" class="bds_more shareText" data-cmd="more">Share</a>
+                    </span>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -153,262 +199,47 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/07/31/vuln-1/" >
-                
-                    <span>漏洞挖掘：一个有趣的越权获取任意用户的session</span>
-            </a>
-            <a class="content-show-full" href = "/2018/07/31/vuln-1/" >
-                <div class="abstract-content">
-                    偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。
-这个漏洞已经修复了，我就找了其他的几个可以直接4G网络下自动登陆的APP来测试是否也存在相...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 漏洞挖掘>漏洞挖掘</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/07/31</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/26/php-unserialize/" >
-                
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。</p>
+<p>这个漏洞已经修复了，我就找了其他的几个可以直接4G网络下自动登陆的APP来测试是否也存在相同的漏洞</p>
+<p>先用手机抓包：</p>
+<p><a href="1.png"></a></p>
+<p>手机上抓包时是没有x-up-calling-line-id字段的，将包一模一样的复制然后在burpsuite中将包重新发送：</p>
+<p><a href="2.png"></a></p>
+<p>可以发现两个包的response是不同的，在手机上抓到的包302跳转的时候会传输一个premsisdn，而burpsuite上重新发的时候却没有。这是因为burpsuite用的是电信的网络，发包到服务器之后那后端不到IP对应的手机号，所以无法跳转，我们可以给他添加一个x-up-calling-line-id</p>
+<p><a href="3.png"></a></p>
+<p>跟随地址</p>
+<p><a href="4.png"></a></p>
+<p>这边可以获取到cookie参数，然后结合上面提交的mac地址，构造包来发送到指定端口获取seesion就可以登陆任意用户的账号了</p>
+<p><a href="5.png"></a></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2018/03/26/php-unserialize/" title= 最通俗易懂的PHP反序列化分析 >
+                    <span>Previous Post</span>
                     <span>最通俗易懂的PHP反序列化分析</span>
-            </a>
-            <a class="content-show-full" href = "/2018/03/26/php-unserialize/" >
-                <div class="abstract-content">
-                    最通俗易懂的PHP反序列化分析0x00写在最最最前面文章首发在Freebuf，属FreeBuf原创奖励计划，未经许可禁止转载
-文章会慢慢优化，尽可能用最通俗的表达让大家明白一些知识点。
-0x01写在前面PHP反序列化漏洞虽然利用的条件比较苛刻，但是如果可以利用一般都会产生很严重的后果。在春招的时候很多公司都问过这个问题，说明这个反序列化漏洞的技能点也是很多公司比较关注的技能点。
-可是网上的文章基本讲得比较通俗，找了很久也没有找到一篇看完能让人醍醐灌顶的文章。所以想想就自己来总结一篇吧，我觉得要了解PHP反序列化漏洞，应该从这几方面：
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-什么是反序列化
-为什么会产生这个漏洞
-在编程的过程中...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = php>php</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = unserialize>unserialize</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/03/26</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/02/08/php-source-2/" >
-                
-                    <span>php-source-2</span>
-            </a>
-            <a class="content-show-full" href = "/2018/02/08/php-source-2/" >
-                <div class="abstract-content">
-                    
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/08</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/02/01/php-source-1/" >
-                
-                    <span>php代码审计从0开始</span>
-            </a>
-            <a class="content-show-full" href = "/2018/02/01/php-source-1/" >
-                <div class="abstract-content">
-                    看大牛们游刃在各大cms之间挖洞，决心好好学一下php源码分析
-这是一个php源码审计的项目：项目地址，可以比较系统的了解php的漏洞，每个demo也不是很难，就跟着这个项目来好好学习吧！
-下面是第一个例子
-0x001 01变量覆盖漏洞12345678910111213141516&lt;?php$flag=&apos;xxx&apos;;extract($_GET); if(isset($shiyan)) &#123;    $content=trim(file_get_contents($flag));    if($shiyan==$content)    &#123;      ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = php>php</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/01</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/01/31/sql-inject-sqlmap/" >
-                
-                    <span>从sqlmap的payload里学sql注入(1)</span>
-            </a>
-            <a class="content-show-full" href = "/2018/01/31/sql-inject-sqlmap/" >
-                <div class="abstract-content">
-                    sqli-labs的注入题会自动把注入语句保存下来，正好可以拿来分析sqlmap的一些判断逻辑。
-0x01基础判断：12345678ID:1ID:1ID:1ID:1ID:1111ID:6601ID:1.)(.&quot;,&apos;(),ID:1&apos;aWAFUm&lt;&apos;&quot;&gt;avzTly
-当sqlmap注入了这些语句之后，cmd里面开始显示ID有可能有注入了，我把第七和第八条放到浏览器里面执行以下看看会返回什么
+    <!--PC版-->
 
-报错了
-我猜可能sqlmap这里是通过后端报错才判断ID这个参数可能含有sql注入
-12345678910ID:1) AND 4934=49...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = sql注入>sql注入</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/31</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/01/31/python-decorator-1/" >
-                
-                    <span>python的装饰器(上)</span>
-            </a>
-            <a class="content-show-full" href = "/2018/01/31/python-decorator-1/" >
-                <div class="abstract-content">
-                    python的装饰器(上)
-文章先是发在逼乎，估计有一个月了，看到的人和赞的人也并不多，可能太偏向于基础了,python的装饰器进阶版的文章因为最近一直在外出，每天回家都比较累所以没有去写他(自己懒！)，尽量早点鞭策自己早点写完吧
-说实话很早以前就想再继续更新博客了。第一个不瞒您说，太菜了，怕写的东西被人笑话是一方面，另一方面就是自己有很严重的拖延症，还比较懒。2018年立一个flag吧，最好是有时间规划的更新博客，比如一个星期或者两个星期一更
-废话分界线
-读这篇你必须了解的知识：
+    <!--PC版-->
 
-python函数的知识
-python基础操作
 
-刚学python的时候，对装饰器这个概念很是难理解。在百...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = python>python</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 装饰器>装饰器</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/31</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/01/30/first-page-1/" >
-                
-                    <span>hexo和atom的一些配置</span>
-            </a>
-            <a class="content-show-full" href = "/2018/01/30/first-page-1/" >
-                <div class="abstract-content">
-                    第一篇文章用atom书写markdown的一些小配置
-hexo配置:博客用的主题叫做archer，很漂亮。配置也比以前用的NexT来得方便，不会那么繁杂，网上讲hexo的配置很多了，配置也有一堆在贴，我就不再赘述了。在这里讲一下我在写博客的时候传图的办法（PS:如果有更好的办法求私信）
-因为我的Hexo搭建在云服务器里面，传图的解决办法我主要是拿winscp直接拉进去，当然其实有更好的办法，这里强烈推荐一个软件MobaXterm可以很好的替代Xshell，唯一的缺点就是支持的字符可能没有Xshell多。对了在这里说一下，Xshell付费的问题，可以直接去Xshell官网下Xshell6 ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 杂谈>杂谈</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/30</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/01/29/hello-world/" >
-                
-                    <span>Hello World</span>
-            </a>
-            <a class="content-show-full" href = "/2018/01/29/hello-world/" >
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/29</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -454,6 +285,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
