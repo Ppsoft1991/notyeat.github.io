@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        漏洞挖掘：一个有趣的越权获取任意用户的session · Yoki Security
+        漏洞挖掘：越权获取任意用户的session · Yoki Security
         
     </title>
     <link rel="icon" href= /assets/favicon.ico>
@@ -72,7 +72,7 @@
                 <a href="/" >notyeat</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">漏洞挖掘：一个有趣的越权获取任意用户的session</a>
+                <a href="#" class="post-name">漏洞挖掘：越权获取任意用户的session</a>
             </div>
     </div>
     
@@ -93,7 +93,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            漏洞挖掘：一个有趣的越权获取任意用户的session
+            漏洞挖掘：越权获取任意用户的session
             <!-- 404 -->
             
         </h1>
@@ -201,18 +201,19 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。</p>
+        <p>分享一个比较有趣的漏洞</p>
+<p>偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。</p>
 <p>这个漏洞已经修复了，我就找了其他的几个可以直接4G网络下自动登陆的APP来测试是否也存在相同的漏洞</p>
 <p>先用手机抓包：</p>
-<p><a href="1.png"></a></p>
+<p><img src="1.png" alt=""></p>
 <p>手机上抓包时是没有x-up-calling-line-id字段的，将包一模一样的复制然后在burpsuite中将包重新发送：</p>
-<p><a href="2.png"></a></p>
+<p><img src="2.png" alt=""></p>
 <p>可以发现两个包的response是不同的，在手机上抓到的包302跳转的时候会传输一个premsisdn，而burpsuite上重新发的时候却没有。这是因为burpsuite用的是电信的网络，发包到服务器之后那后端不到IP对应的手机号，所以无法跳转，我们可以给他添加一个x-up-calling-line-id</p>
-<p><a href="3.png"></a></p>
+<p><img src="3.png" alt=""></p>
 <p>跟随地址</p>
-<p><a href="4.png"></a></p>
+<p><img src="4.png" alt=""></p>
 <p>这边可以获取到cookie参数，然后结合上面提交的mac地址，构造包来发送到指定端口获取seesion就可以登陆任意用户的账号了</p>
-<p><a href="5.png"></a></p>
+<p><img src="5.png" alt=""></p>
 
     </article>
     <!-- 前后页  -->
@@ -388,6 +389,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 8 </div>
     
     <div class="post-archive">
@@ -400,7 +411,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/vuln-1/" >漏洞挖掘：一个有趣的越权获取任意用户的session</a>
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/vuln-1/" >漏洞挖掘：越权获取任意用户的session</a>
         </li>
     
     
@@ -443,13 +454,11 @@
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">php</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">代码审计</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">unserialize</a></span>
     
@@ -458,6 +467,8 @@
         <span class="sidebar-tag-name"><a href= "#">装饰器</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">sql注入</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

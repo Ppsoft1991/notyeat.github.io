@@ -160,12 +160,13 @@
         <article class="index-post">
             <a class="abstract-title" href = "/2018/07/31/vuln-1/" >
                 
-                    <span>漏洞挖掘：一个有趣的越权获取任意用户的session</span>
+                    <span>漏洞挖掘：越权获取任意用户的session</span>
             </a>
             <a class="content-show-full" href = "/2018/07/31/vuln-1/" >
                 <div class="abstract-content">
-                    偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。
-这个漏洞已经修复了，我就找了其他的几个可以直接4G网络下自动登陆的APP来测试是否也存在相...
+                    分享一个比较有趣的漏洞
+偶然获得一份漏洞报告，讲得是某运营商的手机app在4G网络的情况下可以自动登陆，然后自动登陆处存在越权可以获得一个encrypttoken，那份漏洞报告中给的内容很粗略。在app检测到用户连接到是wifi的话就需要提供短信验证码等机制登陆，但是如果判断是4G网络就会发送请求登陆的包，网关获取到这个包之后会在数据库中搜索IP对应的手机号，然后在包头部插入x-up-calling-line-id字段，字段的值就是手机号。然后后端接口获取到x-up-calling-line-id值，就返回一些敏感信息。
+这个漏洞已经修复了，我就找了其他的几个可以直接4G网络下自动登陆的...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -550,6 +551,16 @@ More...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 8 </div>
     
     <div class="post-archive">
@@ -562,7 +573,7 @@ More...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/vuln-1/" >漏洞挖掘：一个有趣的越权获取任意用户的session</a>
+            <span class="archive-post-date">07/31</span><a class="archive-post-title" href= "/2018/07/31/vuln-1/" >漏洞挖掘：越权获取任意用户的session</a>
         </li>
     
     
@@ -605,13 +616,11 @@ More...
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">php</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">代码审计</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">杂谈</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">unserialize</a></span>
     
@@ -620,6 +629,8 @@ More...
         <span class="sidebar-tag-name"><a href= "#">装饰器</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">sql注入</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
