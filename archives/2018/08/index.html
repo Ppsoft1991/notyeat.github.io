@@ -158,20 +158,17 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/26/php-unserialize/" >
+            <a class="abstract-title" href = "/2018/08/03/vuln-2-jsonp/" >
                 
-                    <span>最通俗易懂的PHP反序列化分析</span>
+                    <span>浅谈jsonp劫持</span>
             </a>
-            <a class="content-show-full" href = "/2018/03/26/php-unserialize/" >
+            <a class="content-show-full" href = "/2018/08/03/vuln-2-jsonp/" >
                 <div class="abstract-content">
-                    最通俗易懂的PHP反序列化分析0x00写在最最最前面文章首发在Freebuf，属FreeBuf原创奖励计划，未经许可禁止转载
-文章会慢慢优化，尽可能用最通俗的表达让大家明白一些知识点。
-0x01写在前面PHP反序列化漏洞虽然利用的条件比较苛刻，但是如果可以利用一般都会产生很严重的后果。在春招的时候很多公司都问过这个问题，说明这个反序列化漏洞的技能点也是很多公司比较关注的技能点。
-可是网上的文章基本讲得比较通俗，找了很久也没有找到一篇看完能让人醍醐灌顶的文章。所以想想就自己来总结一篇吧，我觉得要了解PHP反序列化漏洞，应该从这几方面：
-
-什么是反序列化
-为什么会产生这个漏洞
-在编程的过程中...
+                    前言jsop，其实很早以前就被人玩烂了，但是我一直没有重视，感觉顶多泄露点个人信息，直到这个星期，挖到一个jsonp泄露session的漏洞
+这个星期测了个在线教育的站，域名有很多个，不同域名下的访问就会产生一个跨域的问题，跨域的解决方案一般有三种 CORS、postMessage和jsonp。这里jsonp的原理就不细讲了。
+那个网站登陆页面在域名A,登陆认证的后端在域名B，当登陆成功之后域名A有时就会请求域名B接口获取session
+其实原理没什么好讲的，讲这个主要是提醒自己不要小看一些漏洞，像jsonp劫持最多的危害就是泄露敏感信息，比如用户信息、token之类的。
+jsonp原理...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -179,17 +176,13 @@
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = php>php</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = unserialize>unserialize</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = 漏洞挖掘>漏洞挖掘</a>
     
 </div>
                 
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/03/26</span>
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/08/03</span>
                 </div>
             </div>
         </article>

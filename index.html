@@ -171,6 +171,38 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/08/03/vuln-2-jsonp/" >
+                
+                    <span>浅谈jsonp劫持</span>
+            </a>
+            <a class="content-show-full" href = "/2018/08/03/vuln-2-jsonp/" >
+                <div class="abstract-content">
+                    前言jsop，其实很早以前就被人玩烂了，但是我一直没有重视，感觉顶多泄露点个人信息，直到这个星期，挖到一个jsonp泄露session的漏洞
+这个星期测了个在线教育的站，域名有很多个，不同域名下的访问就会产生一个跨域的问题，跨域的解决方案一般有三种 CORS、postMessage和jsonp。这里jsonp的原理就不细讲了。
+那个网站登陆页面在域名A,登陆认证的后端在域名B，当登陆成功之后域名A有时就会请求域名B接口获取session
+其实原理没什么好讲的，讲这个主要是提醒自己不要小看一些漏洞，像jsonp劫持最多的危害就是泄露敏感信息，比如用户信息、token之类的。
+jsonp原理...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 漏洞挖掘>漏洞挖掘</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/08/03</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/07/31/vuln-1/" >
                 
                     <span>漏洞挖掘：越权获取任意用户的session</span>
@@ -638,7 +670,24 @@ More...
     
     
     
-    <div class="total-archive"> Total : 8 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 9 </div>
     
     <div class="post-archive">
     
@@ -647,6 +696,11 @@ More...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/03</span><a class="archive-post-title" href= "/2018/08/03/vuln-2-jsonp/" >浅谈jsonp劫持</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -701,13 +755,13 @@ More...
     
         <span class="sidebar-tag-name"><a href= "#">unserialize</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">python</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">装饰器</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">sql注入</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">漏洞挖掘</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

